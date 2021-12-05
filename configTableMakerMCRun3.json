@@ -56,7 +56,10 @@
         "processRun3": "true"
     },
     "tof-signal": "",
-    "track-extension": "",
+    "track-extension": {
+        "processRun2": "false",
+        "processRun3": "true"
+    },
     "tof-pid": {
         "param-file": "",
         "param-sigma": "TOFReso",
@@ -76,6 +79,7 @@
     "event-selection-task": {
         "syst": "PbPb",
         "muonSelection": "0",
+        "customDeltaBC": "300",
         "isMC": "true",
         "processRun2": "false",
         "processRun3": "true"

@@ -11,12 +11,12 @@
     },
     "internal-dpl-aod-spawner": "",
     "internal-dpl-aod-index-builder": "",
-    "TimestampTask": {
+    "timestamp-task": {
         "verbose": "false",
         "rct-path": "RCT\/RunInformation\/",
         "start-orbit-path": "GRP\/StartOrbit",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "isMC": "false"
+        "isRun2MC": "false"
     },
     "tof-pid-full": {
         "param-file": "",
@@ -51,10 +51,26 @@
         "pid-he": "-1",
         "pid-al": "-1"
     },
-    "bc-selection-task": "",
-    "multiplicity-table": "",
+    "bc-selection-task": {
+        "processRun2": "false",
+        "processRun3": "true"
+    },
+    "multiplicity-table": {
+        "processRun2": "false",
+        "processRun3": "true"
+    },
+    "centrality-table": {
+        "estV0M": "1",
+        "estRun2SPDtks": "-1",
+        "estRun2SPDcls": "-1",
+        "estRun2CL0": "-1",
+        "estRun2CL1": "-1"
+    },
     "tof-signal": "",
-    "track-extension": "",
+    "track-extension": {
+        "processRun2": "false",
+        "processRun3": "true"
+    },
     "weak-decay-indices-v0": "",
     "tof-pid": {
         "param-file": "",
@@ -75,13 +91,16 @@
     "event-selection-task": {
         "syst": "PbPb",
         "muonSelection": "0",
-        "isMC": "false"
+        "customDeltaBC": "300",
+        "isMC": "false",
+        "processRun2": "false",
+        "processRun3": "true"
     },
-    "pid-t-o-f-task-beta": {
+    "tof-pid-beta": {
         "tof-expreso": "80"
     },
     "track-selection": {
-        "isRun3": "false"
+        "isRun3": "true"
     },
     "weak-decay-indices-cascades": "",
     "v0-selector": {
@@ -96,35 +115,39 @@
         "maxchi2tpc": "4"
     },
     "d-q-barrel-track-selection-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1"
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID"
+    },
+    "d-q-muons-selection": {
+        "cfgMuonsCuts": "muonQualityCuts"
     },
     "d-q-event-selection-task": {
         "cfgEventCuts": "eventStandard"
     },
     "d-q-filter-p-p-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1",
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgMuonCuts": "muonQualityCuts",
         "cfgPairCuts": "pairMassLow"
     },
     "track-pid-qa": "",
     "v0-gamma-qa": "",
     "table-maker": {
         "cfgEventCuts": "eventStandard",
-        "cfgBarrelTrackCuts": "jpsiPID1",
-        "cfgMuonCuts": "muonQualityCuts",
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgBarrelLowPt": "1",
         "cfgMuonLowPt": "0.5",
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
-        "cfgIsRun2": "true",
-        "processFullWithCent": "false",
-        "processFullWithCentWithV0Bits": "false",
+        "cfgIsRun2": "false",
         "processFull": "false",
-        "processFullWithV0Bits": "false",
-        "processFullWithEventFilter": "false",
-        "processFullWithEventFilterWithV0Bits": "false",
+        "processFullWithCent": "false",
+        "processBarrelOnlyWithV0Bits": "false",
+        "processBarrelOnlyWithEventFilter": "false",
         "processBarrelOnlyWithCent": "false",
+        "processBarrelOnlyWithCov": "false",
         "processBarrelOnly": "false",
         "processMuonOnlyWithCent": "false",
+        "processMuonOnlyWithCov": "false",
         "processMuonOnly": "false",
         "processMuonOnlyWithFilter": "false",
         "processOnlyBCs": "true"

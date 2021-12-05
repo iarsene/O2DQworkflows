@@ -1,0 +1,38 @@
+{
+    "internal-dpl-clock": "",
+    "internal-dpl-aod-reader": {
+        "time-limit": "0",
+        "orbit-offset-enumeration": "0",
+        "orbit-multiplier-enumeration": "0",
+        "start-value-enumeration": "0",
+        "end-value-enumeration": "-1",
+        "step-value-enumeration": "1",
+        "aod-file": "reducedAod.root"
+    },
+    "internal-dpl-injected-dummy-sink": "",
+    "analysis-event-selection": {
+        "cfgEventCuts": "eventStandardNoINT7",
+        "cfgQA": "true",
+        "processSkimmed": "true",
+        "processDummy": "false"
+    },
+    "analysis-track-selection": {
+        "cfgTrackCuts": "jpsiO2MCdebugCuts",
+        "cfgTrackMCSignals": "eFromJpsi",
+        "cfgQA": "true",
+        "processSkimmed": "true",
+        "processDummy": "false"
+    },
+    "analysis-same-event-pairing": {
+        "cfgTrackCuts": "jpsiO2MCdebugCuts",
+        "cfgMuonCuts": "muonQualityCuts",
+        "cfgBarrelMCRecSignals": "dielectron",
+        "cfgBarrelMCGenSignals": "Jpsi,dielectron",
+        "processJpsiToEESkimmed": "true",
+        "processJpsiToMuMuSkimmed": "true",
+        "processElectronMuonSkimmed": "true",
+        "processDummy": "false"
+    },
+    "internal-dpl-aod-global-analysis-file-sink": "",
+    "internal-dpl-aod-writer": ""
+}

@@ -1,0 +1,60 @@
+{
+    "internal-dpl-clock": "",
+    "internal-dpl-aod-reader": {
+        "time-limit": "0",
+        "orbit-offset-enumeration": "0",
+        "orbit-multiplier-enumeration": "0",
+        "start-value-enumeration": "0",
+        "end-value-enumeration": "-1",
+        "step-value-enumeration": "1",
+        "aod-file": "reducedAod.root",
+        "aod-reader-json": "readerConfiguration_reducedEvent.json"
+    },
+    "internal-dpl-injected-dummy-sink": "",
+    "analysis-event-selection": {
+        "cfgMixingVars": "Vtx3",
+        "cfgEventCuts": "eventStandard",
+        "cfgQA": "false",
+        "processSkimmed": "true",
+        "processDummy": "false"
+    },
+    "analysis-muon-selection": {
+        "cfgMuonCuts": "muonQualityCuts",
+        "cfgQA": "false",
+        "processSkimmed": "true",
+        "processDummy": "false"
+    },
+    "analysis-track-selection": {
+        "cfgTrackCuts": "jpsiPID1,highPtHadron",
+        "cfgQA": "false",
+        "processSkimmed": "true",
+        "processDummy": "false"
+    },
+    "analysis-event-mixing": {
+        "cfgTrackCuts": "jpsiPID1",
+        "cfgMuonCuts": "muonQualityCuts",
+        "processBarrelSkimmed": "true",
+        "processMuonSkimmed": "true",
+        "processBarrelMuonSkimmed": "false",
+        "processDummy": "false"
+    },
+    "analysis-same-event-pairing": {
+        "cfgTrackCuts": "jpsiPID1",
+        "cfgMuonCuts": "muonQualityCuts",
+        "ccdb-url": "http:\/\/ccdb-test.cern.ch:8080",
+        "ccdb-path": "Users\/lm",
+        "ccdb-no-later-than": "1638360910432",
+        "processJpsiToEESkimmed": "true",
+        "processJpsiToMuMuSkimmed": "true",
+        "processElectronMuonSkimmed": "true",
+        "processAllSkimmed": "false",
+        "processDummy": "false"
+    },
+    "analysis-dilepton-hadron": {
+        "cfgLeptonCuts": "jpsiPID1",
+        "processSkimmed": "false",
+        "processDummy": "true"
+    },
+    "internal-dpl-aod-global-analysis-file-sink": "",
+    "internal-dpl-aod-writer": ""
+}

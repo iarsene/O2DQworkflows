@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "\/home\/iarsene\/data\/2020\/LHC20f6\/246994\/PWGZZ\/Run3_Conversion\/207_20210919-0804\/AOD\/001\/AO2D.root"
+        "aod-file": "@AO2Ds_LHC18b_lego204.txt"
     },
     "internal-dpl-aod-spawner": "",
     "internal-dpl-aod-index-builder": "",
@@ -16,7 +16,7 @@
         "rct-path": "RCT\/RunInformation\/",
         "start-orbit-path": "GRP\/StartOrbit",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "isRun2MC": "true"
+        "isRun2MC": "false"
     },
     "tof-pid-full": {
         "param-file": "",
@@ -55,20 +55,34 @@
         "processRun2": "true",
         "processRun3": "false"
     },
-    "multiplicity-table": "",
+    "multiplicity-table": {
+        "processRun2": "true",
+        "processRun3": "false"
+    },
+    "centrality-table": {
+        "estV0M": "1",
+        "estRun2SPDtks": "-1",
+        "estRun2SPDcls": "-1",
+        "estRun2CL0": "-1",
+        "estRun2CL1": "-1"
+    },
     "tof-signal": "",
-    "track-extension": "",
+    "track-extension": {
+        "processRun2": "true",
+        "processRun3": "false"
+    },
+    "weak-decay-indices-v0": "",
     "tof-pid": {
         "param-file": "",
         "param-sigma": "TOFReso",
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "ccdbPath": "Analysis\/PID\/TOF",
         "ccdb-timestamp": "-1",
-        "pid-el": "1",
-        "pid-mu": "1",
-        "pid-pi": "1",
-        "pid-ka": "1",
-        "pid-pr": "1",
+        "pid-el": "-1",
+        "pid-mu": "-1",
+        "pid-pi": "-1",
+        "pid-ka": "-1",
+        "pid-pr": "-1",
         "pid-de": "-1",
         "pid-tr": "-1",
         "pid-he": "-1",
@@ -77,7 +91,8 @@
     "event-selection-task": {
         "syst": "PbPb",
         "muonSelection": "0",
-        "isMC": "true",
+        "customDeltaBC": "300",
+        "isMC": "false",
         "processRun2": "true",
         "processRun3": "false"
     },
@@ -87,27 +102,55 @@
     "track-selection": {
         "isRun3": "false"
     },
-    "table-maker-m-c": {
-        "cfgEventCuts": "eventStandardNoINT7",
-        "cfgBarrelTrackCuts": "kaonPID,NoPID",
+    "weak-decay-indices-cascades": "",
+    "v0-selector": {
+        "d_bz": "-5",
+        "v0cospa": "0.998",
+        "dcav0dau": "0.300000012",
+        "v0Rmin": "3",
+        "v0Rmax": "60",
+        "dcamin": "0",
+        "dcamax": "1e+10",
+        "mincrossedrows": "70",
+        "maxchi2tpc": "4"
+    },
+    "d-q-barrel-track-selection-task": {
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID"
+    },
+    "d-q-muons-selection": {
+        "cfgMuonsCuts": "muonQualityCuts"
+    },
+    "d-q-event-selection-task": {
+        "cfgEventCuts": "eventStandard"
+    },
+    "d-q-filter-p-p-task": {
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgMuonCuts": "muonQualityCuts",
+        "cfgPairCuts": "pairMassLow"
+    },
+    "track-pid-qa": "",
+    "v0-gamma-qa": "",
+    "table-maker": {
+        "cfgEventCuts": "eventStandard",
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
-        "cfgBarrelLowPt": "1.0",
-        "cfgMuonLowPt": "1.0",
-        "cfgMCsignals": "kaonFromPhi,phiMeson,eFromJpsi",
-        "cfgIsRun2": "true",
+        "cfgBarrelLowPt": "1",
+        "cfgMuonLowPt": "0.5",
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
+        "cfgIsRun2": "true",
         "processFull": "false",
-        "processBarrelOnly": "false",
+        "processFullWithCent": "false",
+        "processBarrelOnlyWithV0Bits": "false",
+        "processBarrelOnlyWithEventFilter": "false",
         "processBarrelOnlyWithCent": "false",
         "processBarrelOnlyWithCov": "false",
-        "processMuonOnlyWithCov": "false",
+        "processBarrelOnly": "false",
         "processMuonOnlyWithCent": "false",
+        "processMuonOnlyWithCov": "false",
+        "processMuonOnly": "false",
+        "processMuonOnlyWithFilter": "false",
         "processOnlyBCs": "true"
-    },
-    "multiplicity-table": {
-        "processRun2": "true",
-        "processRun3": "false"
     },
     "internal-dpl-aod-global-analysis-file-sink": "",
     "internal-dpl-aod-writer": ""
