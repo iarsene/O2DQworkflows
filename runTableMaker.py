@@ -38,6 +38,7 @@ tables = {
   "ReducedMuons" : {"table": "AOD/RTMUON/0", "treename": "ReducedMuons"},
   "ReducedMuonsExtra" : {"table": "AOD/RTMUONEXTRA/0", "treename": "ReducedMuonsExtra"},
   "ReducedMuonsCov" : {"table": "AOD/RTMUONCOV/0", "treename": "ReducedMuonsCov"}
+  "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0", "treename": "ReducedMuonsLabels"}
 }
 # Tables to be written, per process function
 commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov"]
@@ -134,6 +135,7 @@ for processFunc in specificDeps.keys():
         tablesToProduce[table] = 1
       if runOverMC == True:
         tablesToProduce["ReducedTracksBarrelLabels"] = 1
+        tablesToProduce["ReducedMuonsLabels"] = 1
     if "processFull" in processFunc or "processMuon" in processFunc:
       for table in muonCommonTables:
         tablesToProduce[table] = 1
