@@ -61,7 +61,7 @@ specificTables = {
 # Make some checks on provided arguments
 if len(sys.argv) < 3:
   print("ERROR: Invalid syntax! The command line should look like this:")
-  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC> [task|param|value] ...")
+  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC|runMCwithConverter> [task:param:value] ...")
   sys.exit()
 
 # Load the configuration file provided as the first parameter
@@ -70,12 +70,12 @@ with open(sys.argv[1]) as configFile:
   config = json.load(configFile)
 
 # Check whether we run over data or MC
-if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runData")):
+if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runData")):
   print("ERROR: You have to specify either runMC or runData !")
   sys.exit()
 
 runOverMC = False
-if sys.argv[2] == "runMC":
+if ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter")):
   runOverMC = True
 
 # Get all the user required modifications to the configuration file
@@ -167,6 +167,9 @@ with open(writerConfigFileName,'w') as writerConfigFile:
 commandToRun = taskNameInCommandLine + " --configuration json://" + updatedConfigFileName + " --severity error --shm-segment-size 12000000000 --aod-writer-json " + writerConfigFileName + " -b"
 for dep in depsToRun.keys():
   commandToRun += " | " + dep + " --configuration json://" + updatedConfigFileName + " -b"
+
+if sys.argv[2] == "runMCwithConverter" :
+  commandToRun += " | o2-analysis-mc-converter --configuration json://" + updatedConfigFileName + " -b" 
 
 print("====================================================================================================================")
 print("Command to run:")
