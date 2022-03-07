@@ -115,7 +115,7 @@
         "maxchi2tpc": "4"
     },
     "d-q-barrel-track-selection-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID"
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma"
     },
     "d-q-muons-selection": {
         "cfgMuonsCuts": "muonQualityCuts"
@@ -124,7 +124,7 @@
         "cfgEventCuts": "eventStandard"
     },
     "d-q-filter-p-p-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma",
         "cfgMuonCuts": "muonQualityCuts",
         "cfgPairCuts": "pairMassLow"
     },
@@ -132,7 +132,7 @@
     "v0-gamma-qa": "",
     "table-maker": {
         "cfgEventCuts": "eventStandard",
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgBarrelLowPt": "1",
         "cfgMuonLowPt": "0.5",
@@ -140,6 +140,7 @@
         "cfgDetailedQA": "true",
         "cfgIsRun2": "true",
         "processFull": "false",
+        "processFullWithCov": "false",
         "processFullWithCent": "false",
         "processBarrelOnlyWithV0Bits": "false",
         "processBarrelOnlyWithEventFilter": "false",

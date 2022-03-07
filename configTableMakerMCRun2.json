@@ -106,6 +106,7 @@
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
         "processFull": "false",
+        "processFullWithCov": "false",
         "processBarrelOnly": "false",
         "processBarrelOnlyWithCent": "false",
         "processBarrelOnlyWithCov": "false",

@@ -131,8 +131,8 @@
     "track-pid-qa": "",
     "v0-gamma-qa": "",
     "table-maker": {
-        "cfgEventCuts": "eventStandard",
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
+        "cfgEventCuts": "eventStandardNoINT7",
+        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgBarrelLowPt": "1",
         "cfgMuonLowPt": "0.5",
@@ -140,6 +140,7 @@
         "cfgDetailedQA": "true",
         "cfgIsRun2": "false",
         "processFull": "false",
+        "processFullWithCov": "false",
         "processFullWithCent": "false",
         "processBarrelOnlyWithV0Bits": "false",
         "processBarrelOnlyWithEventFilter": "false",
