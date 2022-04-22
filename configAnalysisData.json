@@ -8,45 +8,46 @@
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
         "aod-file": "reducedAod.root",
-        "aod-reader-json": "readerConfiguration_reducedEvent.json"
+        "aod-reader-json": "configs\/readerConfiguration_reducedEvent.json"
     },
     "internal-dpl-injected-dummy-sink": "",
     "analysis-event-selection": {
         "cfgMixingVars": "Vtx3",
-        "cfgEventCuts": "eventStandard",
-        "cfgQA": "false",
+        "cfgEventCuts": "eventStandardNoINT7",
+        "cfgQA": "true",
         "processSkimmed": "true",
         "processDummy": "false"
     },
     "analysis-muon-selection": {
         "cfgMuonCuts": "muonQualityCuts",
         "cfgQA": "false",
-        "processSkimmed": "true",
-        "processDummy": "false"
+        "processSkimmed": "false",
+        "processDummy": "true"
     },
     "analysis-track-selection": {
-        "cfgTrackCuts": "jpsiPID1,highPtHadron",
-        "cfgQA": "false",
+        "cfgTrackCuts": "jpsiO2MCdebugCuts",
+        "cfgQA": "true",
         "processSkimmed": "true",
         "processDummy": "false"
     },
     "analysis-event-mixing": {
-        "cfgTrackCuts": "jpsiPID1",
+        "cfgTrackCuts": "jpsiO2MCdebugCuts",
         "cfgMuonCuts": "muonQualityCuts",
         "processBarrelSkimmed": "true",
-        "processMuonSkimmed": "true",
+        "processMuonSkimmed": "false",
         "processBarrelMuonSkimmed": "false",
         "processDummy": "false"
     },
     "analysis-same-event-pairing": {
-        "cfgTrackCuts": "jpsiPID1",
+        "cfgTrackCuts": "jpsiO2MCdebugCuts",
         "cfgMuonCuts": "muonQualityCuts",
         "ccdb-url": "http:\/\/ccdb-test.cern.ch:8080",
         "ccdb-path": "Users\/lm",
         "ccdb-no-later-than": "1638360910432",
         "processJpsiToEESkimmed": "true",
-        "processJpsiToMuMuSkimmed": "true",
-        "processElectronMuonSkimmed": "true",
+        "processJpsiToMuMuSkimmed": "false",
+        "processJpsiToMuMuVertexingSkimmed": "false",
+        "processElectronMuonSkimmed": "false",
         "processAllSkimmed": "false",
         "processDummy": "false"
     },

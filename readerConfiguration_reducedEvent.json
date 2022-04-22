@@ -33,6 +33,10 @@
       {
         "table": "AOD/RTMUONEXTRA/0",
         "treename": "ReducedMuonsExtra"
+      },
+      {
+        "table": "AOD/RTMUONCOV/0",
+        "treename": "ReducedMuonsCov"
       }
     ]
   }

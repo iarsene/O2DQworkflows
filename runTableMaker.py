@@ -8,6 +8,7 @@ commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analys
 barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
 specificDeps = {
   "processFull" : [],
+  "processFullTiny" : [],
   "processFullWithCov" : [],
   "processFullWithCent" : ["o2-analysis-centrality-table"],
   "processBarrelOnly" : [],
@@ -43,14 +44,12 @@ tables = {
 }
 # Tables to be written, per process function
 commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov"]
-#commonTables = ["ReducedEvents", "ReducedEventsExtended"]
-#barrelCommonTables = ["ReducedTracks","ReducedTracksBarrel","ReducedTracksBarrelPID"]
-barrelCommonTables = ["ReducedTracks","ReducedTracksBarrelPID"]
+barrelCommonTables = ["ReducedTracks","ReducedTracksBarrel","ReducedTracksBarrelPID"]
 muonCommonTables = ["ReducedMuons", "ReducedMuonsExtra"]
 specificTables = {
   "processFull" : [],
+  "processFullTiny" : [],
   "processFullWithCov" : ["ReducedTracksBarrelCov", "ReducedMuonsCov"],
-  #"processFullWithCov" : ["ReducedMuonsCov"],
   "processFullWithCent" : [],
   "processBarrelOnly" : [],
   "processBarrelOnlyWithCov" : ["ReducedTracksBarrelCov"],
@@ -82,6 +81,8 @@ if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sy
 runOverMC = False
 if ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter")):
   runOverMC = True
+
+print("runOverMC ",runOverMC)
 
 # Get all the user required modifications to the configuration file
 for count in range(3, len(sys.argv)):
@@ -144,12 +145,13 @@ for processFunc in specificDeps.keys():
         tablesToProduce[table] = 1
       if runOverMC == True:
         tablesToProduce["ReducedTracksBarrelLabels"] = 1
-        tablesToProduce["ReducedMuonsLabels"] = 1
     if "processFull" in processFunc or "processMuon" in processFunc:
       print("common muon tables==========")      
       for table in muonCommonTables:
         print(table)
         tablesToProduce[table] = 1
+      if runOverMC == True:
+        tablesToProduce["ReducedMuonsLabels"] = 1  
     if runOverMC == True:
       tablesToProduce["ReducedMCTracks"] = 1
     print("specific tables==========")      
@@ -175,7 +177,7 @@ writerConfigFileName = "aodWriterTempConfig.json"
 with open(writerConfigFileName,'w') as writerConfigFile:
   json.dump(writerConfig, writerConfigFile)  
   
-#print(writerConfig)
+print(writerConfig)
 #sys.exit()
       
 commandToRun = taskNameInCommandLine + " --configuration json://" + updatedConfigFileName + " --severity error --shm-segment-size 12000000000 --aod-writer-json " + writerConfigFileName + " -b"
@@ -192,4 +194,6 @@ print("=========================================================================
 print("Tables to produce:")
 print(tablesToProduce.keys())
 print("====================================================================================================================")
+#sys.exit()
+
 os.system(commandToRun)
