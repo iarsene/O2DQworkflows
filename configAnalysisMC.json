@@ -42,6 +42,12 @@
         "processElectronMuonSkimmed": "false",
         "processDummy": "false"
     },
+    "analysis-dilepton-track": {
+        "cfgBarrelMCRecSignals": "mumuFromJpsiFromBc,mumumuFromBc",
+        "cfgBarrelMCGenSignals": "Jpsi",
+        "processDimuonMuonSkimmed": "false",
+        "processDummy": "true"
+    },
     "internal-dpl-aod-global-analysis-file-sink": "",
     "internal-dpl-aod-writer": ""
 }
