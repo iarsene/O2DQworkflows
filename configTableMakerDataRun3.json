@@ -138,6 +138,8 @@
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgBarrelLowPt": "1",
         "cfgMuonLowPt": "0.5",
+        "cfgMinTpcSignal": "30",
+        "cfgMaxTpcSignal": "300",
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
         "cfgIsRun2": "false",

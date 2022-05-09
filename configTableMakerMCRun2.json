@@ -103,6 +103,8 @@
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgBarrelLowPt": "1.0",
         "cfgMuonLowPt": "1.0",
+        "cfgMinTpcSignal": "30",
+        "cfgMaxTpcSignal": "300",
         "cfgMCsignals": "eFromJpsi,muFromJpsi,Jpsi,phiMeson",
         "cfgIsRun2": "true",
         "cfgNoQA": "false",
