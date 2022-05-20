@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "@AO2Ds_LHC18b_lego204.txt"
+        "aod-file": "@infiles/run3pilot_apass3.txt"
     },
     "internal-dpl-aod-spawner": "",
     "internal-dpl-aod-index-builder": "",
@@ -126,9 +126,11 @@
         "cfgEventCuts": "eventStandard"
     },
     "d-q-filter-p-p-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
-        "cfgMuonCuts": "muonQualityCuts",
-        "cfgPairCuts": "pairMassLow"
+        "cfgBarrelSels": "jpsiPID2::1,jpsiO2MCdebugCuts:pairNoCut:1",
+        "cfgMuonSels": "muonLowPt::1,muonHighPt::1,muonLowPt:pairNoCut:1",
+        "cfgWithQA": "false",
+        "processFilterPP": "true",
+        "processDummy": "false"
     },
     "track-pid-qa": "",
     "v0-gamma-qa": "",
@@ -136,7 +138,7 @@
         "cfgEventCuts": "eventStandardNoINT7",
         "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
-        "cfgBarrelLowPt": "1",
+        "cfgBarrelLowPt": "1.0",
         "cfgMuonLowPt": "0.5",
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
@@ -148,7 +150,7 @@
         "processBarrelOnlyWithEventFilter": "false",
         "processBarrelOnlyWithCent": "false",
         "processBarrelOnlyWithCov": "false",
-        "processBarrelOnly": "false",
+        "processBarrelOnly": "true",
         "processMuonOnlyWithCent": "false",
         "processMuonOnlyWithCov": "false",
         "processMuonOnly": "false",
