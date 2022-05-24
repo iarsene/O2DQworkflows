@@ -5,7 +5,7 @@ import json
 import os
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
-barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+barrelDeps = ["o2-analysis-trackselection", "o2-analysis-track-propagation", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tof-base", "o2-analysis-pid-tpc-full"]
 specificDeps = {
   "processFull" : [],
   "processFullTiny" : [],
@@ -65,7 +65,7 @@ specificTables = {
 # Make some checks on provided arguments
 if len(sys.argv) < 3:
   print("ERROR: Invalid syntax! The command line should look like this:")
-  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC|runMCwithConverter> [task:param:value] ...")
+  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC|runMCwithConverter|runMCwithFddConverter> [task:param:value] ...")
   sys.exit()
 
 # Load the configuration file provided as the first parameter
@@ -74,12 +74,12 @@ with open(sys.argv[1]) as configFile:
   config = json.load(configFile)
 
 # Check whether we run over data or MC
-if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runData")):
+if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runData") or (sys.argv[2] == "runMCwithFddConverter")):
   print("ERROR: You have to specify either runMC or runData !")
   sys.exit()
 
 runOverMC = False
-if ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter")):
+if ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runMCwithFddConverter")):
   runOverMC = True
 
 print("runOverMC ",runOverMC)
@@ -186,6 +186,9 @@ for dep in depsToRun.keys():
 
 if sys.argv[2] == "runMCwithConverter" :
   commandToRun += " | o2-analysis-mc-converter --configuration json://" + updatedConfigFileName + " -b" 
+
+if sys.argv[2] == "runMCwithFddConverter" :
+  commandToRun += " | o2-analysis-fdd-converter --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
