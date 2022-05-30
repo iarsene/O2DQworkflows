@@ -1,0 +1,14 @@
+{
+  "OutputDirector": {
+    "debugmode": true,
+    "resfile": "dileptonAOD",
+    "resfilemode": "RECREATE",
+    "ntfmerge": 1,
+    "OutputDescriptors": [
+      {
+        "table": "AOD/RTDILEPTON/0",
+        "treename": "Dileptons"
+      }
+    ]
+  }
+}

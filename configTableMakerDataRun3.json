@@ -7,23 +7,26 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "@AO2Ds_LHC18b_lego204.txt"
+        "aod-file": "@infiles/run3pilotMC_LHC21k6.txt"
     },
     "internal-dpl-aod-spawner": "",
     "internal-dpl-aod-index-builder": "",
     "timestamp-task": {
         "verbose": "false",
-        "rct-path": "RCT\/RunInformation\/",
-        "start-orbit-path": "GRP\/StartOrbit",
-        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "isRun2MC": "false"
     },
-    "tof-pid-full": {
-        "param-file": "",
-        "param-sigma": "TOFReso",
+    "track-propagation": {
         "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "ccdbPath": "Analysis\/PID\/TOF",
-        "ccdb-timestamp": "-1",
+        "lutPath": "GLO\/Param\/MatLUT",
+        "geoPath": "GLO\/Config\/GeometryAligned",
+        "grpPath": "GLO\/GRP\/GRP",
+        "mVtxPath": "GLO\/Calib\/MeanVertex",
+        "processStandard": "false",
+        "processCovariance": "true"
+    },
+    "tof-pid-full": {
+        "processEvTime": "false",
+        "processNoEvTime": "true",
         "pid-el": "1",
         "pid-mu": "1",
         "pid-pi": "1",
@@ -35,14 +38,6 @@
         "pid-al": "-1"
     },
     "tpc-pid-full": {
-        "param-file": "",
-        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "ccdbPath": "Analysis\/PID\/TPC\/Response",
-        "ccdb-timestamp": "0",
-        "useNetworkCorrection": 0,
-        "downloadNetworkFromAlien": 0,
-        "networkPathAlien": "alien:///alice/cern.ch/user/c/csonnabe/tpc_network_testing/net_onnx_0.onnx",
-        "networkPathLocally": "network.onnx",
         "pid-el": "1",
         "pid-mu": "1",
         "pid-pi": "1",
@@ -75,11 +70,8 @@
     },
     "weak-decay-indices-v0": "",
     "tof-pid": {
-        "param-file": "",
-        "param-sigma": "TOFReso",
-        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
-        "ccdbPath": "Analysis\/PID\/TOF",
-        "ccdb-timestamp": "-1",
+        "processEvTime": "false",
+        "processNoEvTime": "true",
         "pid-el": "-1",
         "pid-mu": "-1",
         "pid-pi": "-1",
@@ -91,7 +83,7 @@
         "pid-al": "-1"
     },
     "event-selection-task": {
-        "syst": "PbPb",
+        "syst": "pp",
         "muonSelection": "0",
         "customDeltaBC": "300",
         "isMC": "false",
@@ -101,6 +93,7 @@
     "tof-pid-beta": {
         "tof-expreso": "80"
     },
+    "tof-event-time": "",
     "track-selection": {
         "isRun3": "true"
     },
@@ -117,29 +110,41 @@
         "maxchi2tpc": "4"
     },
     "d-q-barrel-track-selection-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID"
+        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2",
+        "cfgWithQA": "false",
+        "processSelection": "true",
+        "processSelectionTiny": "false",
+        "processDummy": "false"
     },
     "d-q-muons-selection": {
-        "cfgMuonsCuts": "muonQualityCuts"
+        "cfgMuonsCuts": "muonHighPt",
+        "cfgWithQA": "false",
+        "processSelection": "true"
     },
     "d-q-event-selection-task": {
-        "cfgEventCuts": "eventStandard"
+        "cfgEventCuts": "eventStandardNoINT7",
+        "cfgWithQA": "false",
+        "processEventSelection": "true",
+        "processDummy": "false"
     },
     "d-q-filter-p-p-task": {
-        "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma,NoPID",
-        "cfgMuonCuts": "muonQualityCuts",
-        "cfgPairCuts": "pairMassLow"
+        "cfgBarrelSels": "jpsiO2MCdebugCuts2::1",
+        "cfgMuonSels": "muonHighPt::1",
+        "cfgWithQA": "false",
+        "processFilterPP": "true",
+        "processFilterPPTiny": "false",
+        "processDummy": "false"
     },
     "track-pid-qa": "",
     "v0-gamma-qa": "",
     "table-maker": {
         "cfgEventCuts": "eventStandardNoINT7",
-        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts",
+        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts,kaonPID",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
-        "cfgBarrelLowPt": "1",
+        "cfgBarrelLowPt": "0.5",
         "cfgMuonLowPt": "0.5",
-        "cfgMinTpcSignal": "30",
-        "cfgMaxTpcSignal": "300",
+        "cfgMinTpcSignal": "50",
+        "cfgMaxTpcSignal": "200",
         "cfgNoQA": "false",
         "cfgDetailedQA": "true",
         "cfgIsRun2": "false",

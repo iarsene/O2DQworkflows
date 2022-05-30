@@ -16,20 +16,20 @@
         "processDummy": "false"
     },
     "d-q-barrel-track-selection": {
-        "cfgBarrelTrackCuts": "jpsiPID2,jpsiO2MCdebugCuts",
+        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts,jpsiO2MCdebugCuts",
         "cfgWithQA": "false",
         "processSelection": "true",
         "processDummy": "false"
     },
     "d-q-muons-selection": {
-        "cfgMuonsCuts": "muonLowPt,muonHighPt",
+        "cfgMuonsCuts": "muonHighPt",
         "cfgWithQA": "false",
         "processSelection": "true",
         "processDummy": "false"
     },
     "d-q-filter-p-p-task": {
-        "cfgBarrelSels": "jpsiPID2::1,jpsiO2MCdebugCuts:pairNoCut:1",
-        "cfgMuonSels": "muonLowPt::1,muonHighPt::1,muonLowPt:pairNoCut:1",
+        "cfgBarrelSels": "jpsiO2MCdebugCuts2::1,jpsiO2MCdebugCuts2::2,jpsiO2MCdebugCuts3::1,jpsiO2MCdebugCuts3::2,jpsiO2MCdebugCuts::1,jpsiO2MCdebugCuts::2",
+        "cfgMuonSels": "muonHighPt::1",
         "cfgWithQA": "false",
         "processFilterPP": "true",
         "processDummy": "false"

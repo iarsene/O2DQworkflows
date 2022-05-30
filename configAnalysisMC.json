@@ -7,7 +7,7 @@
         "start-value-enumeration": "0",
         "end-value-enumeration": "-1",
         "step-value-enumeration": "1",
-        "aod-file": "reducedAod.root",
+        "aod-file": "reducedAod_mc.root",
         "aod-reader-json": "configs\/readerConfiguration_reducedEventMC.json"
     },
     "internal-dpl-injected-dummy-sink": "",
@@ -18,28 +18,27 @@
         "processDummy": "false"
     },
     "analysis-track-selection": {
-        "cfgTrackCuts": "jpsiO2MCdebugCuts",
-        "cfgTrackMCSignals": "electronPrimary",
-        "cfgQA": "false",
-        "processSkimmed": "false",
-        "processDummy": "true"
+        "cfgTrackCuts": "jpsiO2MCdebugCuts2",
+        "cfgTrackMCSignals": "eFromJpsi,eFromLMeeLF",
+        "cfgQA": "true",
+        "processSkimmed": "true",
+        "processDummy": "false"
     },
     "analysis-muon-selection": {
         "cfgMuonCuts": "muonQualityCuts",
         "cfgMuonMCSignals": "muFromJpsi",
         "cfgQA": "true",
-        "processSkimmed": "true",
-        "processDummy": "false"
+        "processSkimmed": "false",
+        "processDummy": "true"
     },
     "analysis-same-event-pairing": {
-        "cfgTrackCuts": "jpsiO2MCdebugCuts",
+        "cfgTrackCuts": "jpsiO2MCdebugCuts2",
         "cfgMuonCuts": "muonQualityCuts",
-        "cfgBarrelMCRecSignals": "mumuFromJpsi",
-        "cfgBarrelMCGenSignals": "Jpsi,dielectron",
-        "processJpsiToEESkimmed": "false",
+        "cfgBarrelMCRecSignals": "eeFromJpsi,eeFromLMeeLF,dielectron",
+        "cfgBarrelMCGenSignals": "Jpsi",
+        "processJpsiToEESkimmed": "true",
         "processJpsiToMuMuSkimmed": "false",
-        "processJpsiToMuMuVertexingSkimmed": "true",
-        "processElectronMuonSkimmed": "false",
+        "processJpsiToMuMuVertexingSkimmed": "false",
         "processDummy": "false"
     },
     "analysis-dilepton-track": {
