@@ -1,11 +1,22 @@
 #!/usr/bin/env python3
 
+from ast import parse
 import sys
 import json
 import os
+import argparse
+
+parser = argparse.ArgumentParser(description='Arguments to pass')
+parser.add_argument('cfgFileName', metavar='text', default='config.json', help='config file name')
+parser.add_argument('runData', help="Run over data", action="store_true")
+parser.add_argument('-runMC', help="Run over MC", action="store_true")
+parser.add_argument('analysisString', metavar='text', help='my analysis string')
+parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
+parser.add_argument('--add_fdd_conv', help="Add the fdd converter", action="store_true")
+extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
-barrelDeps = ["o2-analysis-trackselection", "o2-analysis-track-propagation", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tof-base", "o2-analysis-pid-tpc-full"]
+barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
 specificDeps = {
   "processFull" : [],
   "processFullTiny" : [],
@@ -65,33 +76,28 @@ specificTables = {
 # Make some checks on provided arguments
 if len(sys.argv) < 3:
   print("ERROR: Invalid syntax! The command line should look like this:")
-  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC|runMCwithConverter|runMCwithFddConverter> [task:param:value] ...")
+  print("  ./runTableMaker.py <yourConfig.json> <runData|runMC> [task:param:value] ...")
   sys.exit()
 
 # Load the configuration file provided as the first parameter
 config = {}
-with open(sys.argv[1]) as configFile:
+with open(extrargs.cfgFileName) as configFile:
   config = json.load(configFile)
 
 # Check whether we run over data or MC
-if not ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runData") or (sys.argv[2] == "runMCwithFddConverter")):
+if not (extrargs.runMC or extrargs.runData):
   print("ERROR: You have to specify either runMC or runData !")
   sys.exit()
 
 runOverMC = False
-if ((sys.argv[2] == "runMC") or (sys.argv[2] == "runMCwithConverter") or (sys.argv[2] == "runMCwithFddConverter")):
+if (extrargs.runMC):
   runOverMC = True
 
 print("runOverMC ",runOverMC)
 
-# Get all the user required modifications to the configuration file
-for count in range(3, len(sys.argv)):
-  param = sys.argv[count].split(":")
-  if len(param) != 3:
-    print("ERROR: Wrong parameter syntax: ", param)
-    sys.exit()
-  config[param[0]][param[1]] = param[2]
-
+if extrargs.analysisString != "":
+    param = extrargs.analysisString.split(":")
+    config[param[0]][param[1]] = param[2]
 
 taskNameInConfig = "table-maker"
 taskNameInCommandLine = "o2-analysis-dq-table-maker"
@@ -184,11 +190,11 @@ commandToRun = taskNameInCommandLine + " --configuration json://" + updatedConfi
 for dep in depsToRun.keys():
   commandToRun += " | " + dep + " --configuration json://" + updatedConfigFileName + " -b"
 
-if sys.argv[2] == "runMCwithConverter" :
-  commandToRun += " | o2-analysis-mc-converter --configuration json://" + updatedConfigFileName + " -b" 
+if extrargs.add_mc_conv:
+    commandToRun += " | o2-analysis-mc-converter --configuration json://" + updatedConfigFileName + " -b"
 
-if sys.argv[2] == "runMCwithFddConverter" :
-  commandToRun += " | o2-analysis-fdd-converter --configuration json://" + updatedConfigFileName + " -b"
+if extrargs.add_fdd_conv:
+    commandToRun += " | o2-analysis-fdd-converter --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
