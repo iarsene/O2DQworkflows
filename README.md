@@ -16,3 +16,19 @@ Contents:
 3) Reader configurations for the DQ skimmed tables
 3.1) readerConfiguration_reducedEvent.json - for data
 3.1) readerConfiguration_reducedEventMC.json - for MC
+
+# Instructions
+Add extrac tables and converters with:
+1. **--add_mc_conv**: conversion from o2mcparticle to o2mcparticle_001
+2. **--add_fdd_conv**: conversion o2fdd from o2fdd_001
+3. **--add_track_prop**: conversion from o2track to o2track_iu ([link](https://aliceo2group.github.io/analysis-framework/docs/helperTasks/trackPropagation.html))
+
+Examples:
+- Run TableMaker on Data
+  ```ruby
+  python runTableMaker.py configTableMakerDataRun3.json -runMData table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
+  ```
+- Run TableMaker on MC
+  ```ruby
+  python runTableMaker.py configTableMakerMCRun3.json -runMData table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
+  ```
