@@ -97,8 +97,9 @@ if (extrargs.runMC):
 print("runOverMC ",runOverMC)
 
 if extrargs.analysisString != "":
-    param = extrargs.analysisString.split(":")
-    config[param[0]][param[1]] = param[2]
+  args = [line.split(':') for line in extrargs.analysisString.split(',') if line]
+  for arg in args:
+    config[arg[0]][arg[1]] = arg[2]
 
 taskNameInConfig = "table-maker"
 taskNameInCommandLine = "o2-analysis-dq-table-maker"
