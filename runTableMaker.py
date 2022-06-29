@@ -8,7 +8,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Arguments to pass')
 parser.add_argument('cfgFileName', metavar='text', default='config.json', help='config file name')
-parser.add_argument('runData', help="Run over data", action="store_true")
+parser.add_argument('-runData', help="Run over data", action="store_true")
 parser.add_argument('-runMC', help="Run over MC", action="store_true")
 parser.add_argument('analysisString', metavar='text', help='my analysis string')
 parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
