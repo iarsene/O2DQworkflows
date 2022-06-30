@@ -26,9 +26,14 @@ Add extrac tables and converters with:
 Examples:
 - Run TableMaker on Data
   ```ruby
-  python runTableMaker.py configTableMakerDataRun3.json -runMData table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
+  python runTableMaker.py configTableMakerDataRun3.json -runData table-maker:processMuonOnlyWithCov:true --add_track_prop
   ```
 - Run TableMaker on MC
   ```ruby
-  python runTableMaker.py configTableMakerMCRun3.json -runMData table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
+  python runTableMaker.py configTableMakerMCRun3.json -runMC table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
   ```
+
+In case of multiple text commands, separate them with comma:
+```ruby
+python runTableMaker.py configTableMakerDataRun3.json -runData internal-dpl-aod-reader:aod-file:AO2D.root,table-maker:processMuonOnly:true --add_track_prop
+```
