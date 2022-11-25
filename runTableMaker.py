@@ -34,25 +34,25 @@ specificDeps = {
   "processMuonOnlyWithFilter" : ["o2-analysis-dq-filter-pp", "o2-analysis-fwdtrackextension"]
   #"processFullWithCentWithV0Bits" : ["o2-analysis-centrality-table","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
   #"processFullWithEventFilterWithV0Bits" : ["o2-analysis-dq-filter-pp","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
-} 
+}
 
 # Definition of all the tables we may write
 tables = {
-  "ReducedEvents" : {"table": "AOD/REDUCEDEVENT/0", "treename": "ReducedEvents"},
-  "ReducedEventsExtended" : {"table": "AOD/REEXTENDED/0", "treename": "ReducedEventsExtended"},
-  "ReducedEventsVtxCov" : {"table": "AOD/REVTXCOV/0", "treename": "ReducedEventsVtxCov"},
-  "ReducedMCEventLabels" : {"table": "AOD/REMCCOLLBL/0", "treename": "ReducedMCEventLabels"},
-  "ReducedMCEvents" : {"table": "AOD/REMC/0", "treename": "ReducedMCEvents"},
-  "ReducedTracks" : {"table": "AOD/REDUCEDTRACK/0", "treename": "ReducedTracks"},
-  "ReducedTracksBarrel" : {"table": "AOD/RTBARREL/0", "treename": "ReducedTracksBarrel"},
-  "ReducedTracksBarrelCov" : {"table": "AOD/RTBARRELCOV/0", "treename": "ReducedTracksBarrelCov"},
-  "ReducedTracksBarrelPID" : {"table": "AOD/RTBARRELPID/0", "treename": "ReducedTracksBarrelPID"},
-  "ReducedTracksBarrelLabels" : {"table": "AOD/RTBARRELLABELS/0", "treename": "ReducedTracksBarrelLabels"},
-  "ReducedMCTracks" : {"table": "AOD/RTMC/0", "treename": "ReducedMCTracks"},
-  "ReducedMuons" : {"table": "AOD/RTMUON/0", "treename": "ReducedMuons"},
-  "ReducedMuonsExtra" : {"table": "AOD/RTMUONEXTRA/0", "treename": "ReducedMuonsExtra"},
-  "ReducedMuonsCov" : {"table": "AOD/RTMUONCOV/0", "treename": "ReducedMuonsCov"},
-  "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0", "treename": "ReducedMuonsLabels"}
+  "ReducedEvents" : {"table": "AOD/REDUCEDEVENT/0"},
+  "ReducedEventsExtended" : {"table": "AOD/REEXTENDED/0"},
+  "ReducedEventsVtxCov" : {"table": "AOD/REVTXCOV/0"},
+  "ReducedMCEventLabels" : {"table": "AOD/REMCCOLLBL/0"},
+  "ReducedMCEvents" : {"table": "AOD/REDUCEDMCEVENT/0"},
+  "ReducedTracks" : {"table": "AOD/REDUCEDTRACK/0"},
+  "ReducedTracksBarrel" : {"table": "AOD/RTBARREL/0"},
+  "ReducedTracksBarrelCov" : {"table": "AOD/RTBARRELCOV/0"},
+  "ReducedTracksBarrelPID" : {"table": "AOD/RTBARRELPID/0"},
+  "ReducedTracksBarrelLabels" : {"table": "AOD/RTBARRELLABELS/0"},
+  "ReducedMCTracks" : {"table": "AOD/REDUCEDMCTRACK/0"},
+  "ReducedMuons" : {"table": "AOD/RTMUON/0"},
+  "ReducedMuonsExtra" : {"table": "AOD/RTMUONEXTRA/0"},
+  "ReducedMuonsCov" : {"table": "AOD/RTMUONCOV/0"},
+  "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0"}
 }
 # Tables to be written, per process function
 commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov"]
@@ -116,15 +116,15 @@ updatedConfigFileName = "tempConfig.json"
 with open(updatedConfigFileName,'w') as outputFile:
   json.dump(config, outputFile)
 
-# Check which dependencies need to be run  
+# Check which dependencies need to be run
 depsToRun = {}
 for dep in commonDeps:
   depsToRun[dep] = 1
 
 for processFunc in specificDeps.keys():
   if not processFunc in config[taskNameInConfig].keys():
-    continue        
-  if config[taskNameInConfig][processFunc] == "true":      
+    continue
+  if config[taskNameInConfig][processFunc] == "true":
     if "processFull" in processFunc or "processBarrel" in processFunc:
       for dep in barrelDeps:
         depsToRun[dep] = 1
@@ -139,32 +139,32 @@ for table in commonTables:
 if runOverMC == True:
   tablesToProduce["ReducedMCEvents"] = 1
   tablesToProduce["ReducedMCEventLabels"] = 1
-  
+
 for processFunc in specificDeps.keys():
   if not processFunc in config[taskNameInConfig].keys():
-    continue          
+    continue
   if config[taskNameInConfig][processFunc] == "true":
     print("processFunc ========")
     print(processFunc)
     if "processFull" in processFunc or "processBarrel" in processFunc:
-      print("common barrel tables==========")      
+      print("common barrel tables==========")
       for table in barrelCommonTables:
-        print(table)      
+        print(table)
         tablesToProduce[table] = 1
       if runOverMC == True:
         tablesToProduce["ReducedTracksBarrelLabels"] = 1
     if "processFull" in processFunc or "processMuon" in processFunc:
-      print("common muon tables==========")      
+      print("common muon tables==========")
       for table in muonCommonTables:
         print(table)
         tablesToProduce[table] = 1
       if runOverMC == True:
-        tablesToProduce["ReducedMuonsLabels"] = 1  
+        tablesToProduce["ReducedMuonsLabels"] = 1
     if runOverMC == True:
       tablesToProduce["ReducedMCTracks"] = 1
-    print("specific tables==========")      
+    print("specific tables==========")
     for table in specificTables[processFunc]:
-      print(table)      
+      print(table)
       tablesToProduce[table] = 1
 
 # Generate the aod-writer output descriptor json file
@@ -180,14 +180,14 @@ iTable = 0
 for table in tablesToProduce.keys():
   writerConfig["OutputDirector"]["OutputDescriptors"].insert(iTable, tables[table])
   iTable += 1
-  
+
 writerConfigFileName = "aodWriterTempConfig.json"
 with open(writerConfigFileName,'w') as writerConfigFile:
-  json.dump(writerConfig, writerConfigFile)  
-  
+  json.dump(writerConfig, writerConfigFile)
+
 print(writerConfig)
 #sys.exit()
-      
+
 commandToRun = taskNameInCommandLine + " --configuration json://" + updatedConfigFileName + " --severity error --shm-segment-size 12000000000 --aod-writer-json " + writerConfigFileName + " -b"
 for dep in depsToRun.keys():
   commandToRun += " | " + dep + " --configuration json://" + updatedConfigFileName + " -b"
