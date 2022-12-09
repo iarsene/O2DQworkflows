@@ -7,7 +7,6 @@
     "OutputDescriptors": [
       {
         "table": "AOD/RTDILEPTON/0",
-        "treename": "Dileptons"
       }
     ]
   }
