@@ -17,7 +17,9 @@ parser.add_argument('--add_track_prop', help="Add track propagation to the inner
 extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
-barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+#barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+barrelDeps = ["o2-analysis-trackselection","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+muonDeps = ["o2-analysis-fwdtrackextension"]
 specificDeps = {
   "processFull" : [],
   "processFullTiny" : [],
@@ -28,10 +30,10 @@ specificDeps = {
   "processBarrelOnlyWithV0Bits" : ["o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
   "processBarrelOnlyWithEventFilter" : ["o2-analysis-dq-filter-pp"],
   "processBarrelOnlyWithCent" : ["o2-analysis-centrality-table"],
-  "processMuonOnly" : ["o2-analysis-fwdtrackextension"],
-  "processMuonOnlyWithCov" : ["o2-analysis-fwdtrackextension"],
-  "processMuonOnlyWithCent" : ["o2-analysis-centrality-table", "o2-analysis-fwdtrackextension"],
-  "processMuonOnlyWithFilter" : ["o2-analysis-dq-filter-pp", "o2-analysis-fwdtrackextension"]
+  "processMuonOnly" : [],
+  "processMuonOnlyWithCov" : [],
+  "processMuonOnlyWithCent" : ["o2-analysis-centrality-table"],
+  "processMuonOnlyWithFilter" : ["o2-analysis-dq-filter-pp"]
   #"processFullWithCentWithV0Bits" : ["o2-analysis-centrality-table","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
   #"processFullWithEventFilterWithV0Bits" : ["o2-analysis-dq-filter-pp","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
 }
@@ -128,6 +130,9 @@ for processFunc in specificDeps.keys():
     if "processFull" in processFunc or "processBarrel" in processFunc:
       for dep in barrelDeps:
         depsToRun[dep] = 1
+    if "processFull" in processFunc or "processMuon" in processFunc:
+      for dep in muonDeps:
+        depsToRun[dep] = 1    
     for dep in specificDeps[processFunc]:
       depsToRun[dep] = 1
 
