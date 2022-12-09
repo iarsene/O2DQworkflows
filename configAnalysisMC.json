@@ -36,9 +36,9 @@
         "cfgMuonCuts": "muonQualityCuts",
         "cfgBarrelMCRecSignals": "eeFromJpsi,eeFromLMeeLF,dielectron",
         "cfgBarrelMCGenSignals": "Jpsi",
-        "processJpsiToEESkimmed": "true",
-        "processJpsiToMuMuSkimmed": "false",
-        "processJpsiToMuMuVertexingSkimmed": "false",
+        "processDecayToEESkimmed": "true",
+        "processDecayToMuMuSkimmed": "false",
+        "processDecayToMuMuVertexingSkimmed": "false",
         "processDummy": "false"
     },
     "analysis-dilepton-track": {
