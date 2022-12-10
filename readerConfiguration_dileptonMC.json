@@ -1,10 +1,7 @@
 {
-  "OutputDirector": {
+  "InputDirector": {
     "debugmode": true,
-    "resfile": "dileptonAOD",
-    "resfilemode": "RECREATE",
-    "ntfmerge": 1,
-    "OutputDescriptors": [
+    "InputDescriptors": [
       {
         "table": "AOD/REDUCEDEVENT/0",
       },
@@ -22,7 +19,7 @@
       },
       {
         "table": "AOD/RTMUONCOV/0",
-      },   
+      },
       {
         "table": "AOD/REDUCEDMCEVENT/0",
       },

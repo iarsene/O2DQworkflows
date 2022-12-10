@@ -12,10 +12,16 @@
         "table": "AOD/REVTXCOV/0",
       },
       {
+        "table": "AOD/REQVECTOR/0",
+      },
+      {
         "table": "AOD/REDUCEDTRACK/0",
       },
       {
         "table": "AOD/RTBARREL/0",
+      },
+      {
+        "table": "AOD/RTBARRELCOV/0",
       },
       {
         "table": "AOD/RTBARRELPID/0",
@@ -28,6 +34,15 @@
       },
       {
         "table": "AOD/RTMUONCOV/0",
+      },
+      {
+        "table": "AOD/AMBIGUOUSTRACK/0",
+      },
+      {
+        "table": "AOD/AMBIGUOUSFWDTR/0",
+      },
+      {
+        "table": "AOD/DALITZBITS/0",
       }
     ]
   }
