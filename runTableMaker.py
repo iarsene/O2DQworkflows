@@ -14,11 +14,12 @@ parser.add_argument('analysisString', metavar='text', help='my analysis string')
 parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
 parser.add_argument('--add_fdd_conv', help="Add the fdd converter", action="store_true")
 parser.add_argument('--add_track_prop', help="Add track propagation to the innermost layer (TPC or ITS)", action="store_true")
+parser.add_argument("--add_weakdecay_ind", help = "Add Converts V0 and cascade version 000 to 001", action = "store_true")
 extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
-#barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
-barrelDeps = ["o2-analysis-trackselection","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
+#barrelDeps = ["o2-analysis-trackselection","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
 muonDeps = ["o2-analysis-fwdtrackextension"]
 specificDeps = {
   "processFull" : [],
@@ -27,15 +28,20 @@ specificDeps = {
   "processFullWithCent" : ["o2-analysis-centrality-table"],
   "processBarrelOnly" : [],
   "processBarrelOnlyWithCov" : [],
-  "processBarrelOnlyWithV0Bits" : ["o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
+  "processBarrelOnlyWithV0Bits" : ["o2-analysis-dq-v0-selector"],
+  "processBarrelOnlyWithDalitzBits" : ["o2-analysis-dq-dalitz-selection"],
   "processBarrelOnlyWithEventFilter" : ["o2-analysis-dq-filter-pp"],
+  "processBarrelOnlyWithQvector" : ["o2-analysis-centrality-table", "o2-analysis-dq-flow"],
   "processBarrelOnlyWithCent" : ["o2-analysis-centrality-table"],
   "processMuonOnly" : [],
   "processMuonOnlyWithCov" : [],
   "processMuonOnlyWithCent" : ["o2-analysis-centrality-table"],
-  "processMuonOnlyWithFilter" : ["o2-analysis-dq-filter-pp"]
-  #"processFullWithCentWithV0Bits" : ["o2-analysis-centrality-table","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
-  #"processFullWithEventFilterWithV0Bits" : ["o2-analysis-dq-filter-pp","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
+  "processMuonOnlyWithQvector" : ["o2-analysis-centrality-table", "o2-analysis-dq-flow"],
+  "processMuonOnlyWithFilter" : ["o2-analysis-dq-filter-pp"],
+  "processAmbiguousMuonOnly" : [],
+  "processAmbiguousBarrelOnly" : []
+  # "processFullWithCentWithV0Bits": ["o2-analysis-centrality-table","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
+  # "processFullWithEventFilterWithV0Bits": ["o2-analysis-dq-filter-pp","o2-analysis-dq-v0-selector", "o2-analysis-weak-decay-indices"],
 }
 
 # Definition of all the tables we may write
@@ -43,6 +49,7 @@ tables = {
   "ReducedEvents" : {"table": "AOD/REDUCEDEVENT/0"},
   "ReducedEventsExtended" : {"table": "AOD/REEXTENDED/0"},
   "ReducedEventsVtxCov" : {"table": "AOD/REVTXCOV/0"},
+  "ReducedEventsQvector" : {"table": "AOD/REQVECTOR/0"},
   "ReducedMCEventLabels" : {"table": "AOD/REMCCOLLBL/0"},
   "ReducedMCEvents" : {"table": "AOD/REDUCEDMCEVENT/0"},
   "ReducedTracks" : {"table": "AOD/REDUCEDTRACK/0"},
@@ -54,26 +61,34 @@ tables = {
   "ReducedMuons" : {"table": "AOD/RTMUON/0"},
   "ReducedMuonsExtra" : {"table": "AOD/RTMUONEXTRA/0"},
   "ReducedMuonsCov" : {"table": "AOD/RTMUONCOV/0"},
-  "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0"}
+  "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0"},
+  "AmbiguousTracksMid" : {"table": "AOD/AMBIGUOUSTRACK/0"},
+  "AmbiguousTracksFwd" : {"table": "AOD/AMBIGUOUSFWDTR/0"},
+  "DalitzBits" : {"table": "AOD/DALITZBITS/0"}
 }
 # Tables to be written, per process function
 commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov"]
 barrelCommonTables = ["ReducedTracks","ReducedTracksBarrel","ReducedTracksBarrelPID"]
 muonCommonTables = ["ReducedMuons", "ReducedMuonsExtra"]
 specificTables = {
-  "processFull" : [],
-  "processFullTiny" : [],
-  "processFullWithCov" : ["ReducedTracksBarrelCov", "ReducedMuonsCov"],
-  "processFullWithCent" : [],
-  "processBarrelOnly" : [],
-  "processBarrelOnlyWithCov" : ["ReducedTracksBarrelCov"],
-  "processBarrelOnlyWithV0Bits" : [],
-  "processBarrelOnlyWithEventFilter" : [],
-  "processBarrelOnlyWithCent" : [],
-  "processMuonOnly" : [],
-  "processMuonOnlyWithCov" : ["ReducedMuonsCov"],
-  "processMuonOnlyWithCent" : [],
-  "processMuonOnlyWithFilter" : []
+  "processFull": [],
+  "processFullTiny": [],
+  "processFullWithCov": ["ReducedTracksBarrelCov", "ReducedMuonsCov"],
+  "processFullWithCent": [],
+  "processBarrelOnly": [],
+  "processBarrelOnlyWithCov": ["ReducedTracksBarrelCov"],
+  "processBarrelOnlyWithV0Bits": [],
+  "processBarrelOnlyWithDalitzBits": ["DalitzBits"],
+  "processBarrelOnlyWithQvector": ["ReducedEventsQvector"],
+  "processBarrelOnlyWithEventFilter": [],
+  "processBarrelOnlyWithCent": [],
+  "processMuonOnly": [],
+  "processMuonOnlyWithCov": ["ReducedMuonsCov"],
+  "processMuonOnlyWithCent": [],
+  "processMuonOnlyWithQvector": ["ReducedEventsQvector"],
+  "processMuonOnlyWithFilter": [],
+  "processAmbiguousMuonOnly": ["AmbiguousTracksFwd"],
+  "processAmbiguousBarrelOnly": ["AmbiguousTracksMid"]
 }
 
 # Make some checks on provided arguments
@@ -97,6 +112,10 @@ if (extrargs.runMC):
   runOverMC = True
 
 print("runOverMC ",runOverMC)
+
+# Delete trackextension dependency if track-propagation dependency provided (for compatibility)
+if extrargs.add_track_prop:
+  barrelDeps.remove("o2-analysis-trackextension")
 
 if extrargs.analysisString != "":
   args = [line.split(':') for line in extrargs.analysisString.split(',') if line]
@@ -127,10 +146,10 @@ for processFunc in specificDeps.keys():
   if not processFunc in config[taskNameInConfig].keys():
     continue
   if config[taskNameInConfig][processFunc] == "true":
-    if "processFull" in processFunc or "processBarrel" in processFunc:
+    if "processFull" in processFunc or "processBarrel" in processFunc or "processAmbiguousBarrel" in processFunc:
       for dep in barrelDeps:
         depsToRun[dep] = 1
-    if "processFull" in processFunc or "processMuon" in processFunc:
+    if "processFull" in processFunc or "processMuon" in processFunc or "processAmbiguousMuon" in processFunc:
       for dep in muonDeps:
         depsToRun[dep] = 1    
     for dep in specificDeps[processFunc]:
@@ -188,7 +207,7 @@ for table in tablesToProduce.keys():
 
 writerConfigFileName = "aodWriterTempConfig.json"
 with open(writerConfigFileName,'w') as writerConfigFile:
-  json.dump(writerConfig, writerConfigFile)
+  json.dump(writerConfig, writerConfigFile, indent = 2)
 
 print(writerConfig)
 #sys.exit()

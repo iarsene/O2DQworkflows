@@ -36,15 +36,20 @@
         "cfgMuonCuts": "muonQualityCuts",
         "cfgBarrelMCRecSignals": "eeFromJpsi,eeFromLMeeLF,dielectron",
         "cfgBarrelMCGenSignals": "Jpsi",
+        "cfgFlatTables": "false",
         "processDecayToEESkimmed": "true",
+        "processDecayToEEVertexingSkimmed": "false",
         "processDecayToMuMuSkimmed": "false",
         "processDecayToMuMuVertexingSkimmed": "false",
         "processDummy": "false"
     },
     "analysis-dilepton-track": {
+        "cfgLeptonCuts": "muonQualityCuts",
+        "cfgFillCandidateTable": "false",
         "cfgBarrelMCRecSignals": "mumuFromJpsiFromBc,mumumuFromBc",
         "cfgBarrelMCGenSignals": "Jpsi",
         "processDimuonMuonSkimmed": "false",
+        "processDielectronKaonSkimmed": "false",
         "processDummy": "true"
     },
     "internal-dpl-aod-global-analysis-file-sink": "",
