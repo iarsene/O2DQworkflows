@@ -230,6 +230,9 @@ if extrargs.add_fdd_conv:
 
 if extrargs.add_track_prop:
     commandToRun += " | o2-analysis-track-propagation --configuration json://" + updatedConfigFileName + " -b"
+    
+if extrargs.add_weakdecay_ind:
+    commandToRun += " | o2-analysis-weak-decay-indices --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
