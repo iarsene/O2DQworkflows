@@ -37,40 +37,40 @@ Add extrac tables and converters with:
 Examples:
 - Run TableMaker on Data
   ```ruby
-  python runTableMaker.py configTableMakerDataRun3.json -runData table-maker:processMuonOnlyWithCov:true --add_track_prop
+  python runTableMaker.py configTableMakerDataRun3.json -runData --arg table-maker:processMuonOnlyWithCov:true --add_track_prop
   ```
 - Run TableMaker on MC
   ```ruby
-  python runTableMaker.py configTableMakerMCRun3.json -runMC table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
+  python runTableMaker.py configTableMakerMCRun3.json -runMC --arg table-maker-m-c:processMuonOnlyWithCov:true --add_track_prop
   ```
 
 In case of multiple text commands, separate them with comma:
 ```ruby
-python runTableMaker.py configTableMakerDataRun3.json -runData internal-dpl-aod-reader:aod-file:AO2D.root,table-maker:processMuonOnly:true --add_track_prop
+python runTableMaker.py configTableMakerDataRun3.json -runData --arg internal-dpl-aod-reader:aod-file:AO2D.root,table-maker:processMuonOnly:true --add_track_prop
 ```
 
 - Run tableReader on Skimmed Data
   ```ruby
-  python runAnalysis.py configAnalysisData.json -runData analysis-same-event-pairing:processDecayToEESkimmed:true
+  python runAnalysis.py configAnalysisData.json -runData --arg analysis-same-event-pairing:processDecayToEESkimmed:true
   ```
 - Run dqEfficiency on Skimmed MC
   ```ruby
-  python runAnalysis.py configAnalysisMC.json -runMC analysis-same-event-pairing:processDecayToEESkimmed:true
+  python runAnalysis.py configAnalysisMC.json -runMC --arg analysis-same-event-pairing:processDecayToEESkimmed:true
   ```
 
 In case of multiple text commands, separate them with comma:
 ```ruby
-python runAnalysis.py configAnalysisData.json -runData internal-dpl-aod-reader:aod-file:reducedAod.root,analysis-same-event-pairing:processDecayToEESkimmed:true
+python runAnalysis.py configAnalysisData.json -runData --arg internal-dpl-aod-reader:aod-file:reducedAod.root,analysis-same-event-pairing:processDecayToEESkimmed:true
 ```
 
 Produce dilepton tables with --aod-writer-json (example for MC):
 ```ruby
-python runAnalysis.py configAnalysisMC.json -runMC --aod-writer-json writerConfiguration_dileptonMC.json internal-dpl-aod-reader:aod-file:reducedAod.root,analysis-same-event-pairing:processDecayToMuMuVertexingSkimmed:true
+python runAnalysis.py configAnalysisMC.json -runMC --aod-writer-json writerConfiguration_dileptonMC.json --arg internal-dpl-aod-reader:aod-file:reducedAod.root,analysis-same-event-pairing:processDecayToMuMuVertexingSkimmed:true
 ```
 
 For read dilepton tables, change --aod-reader-json and give aod path of dileptonAod.root (example for dilepton track, dimuon-muon analysis):
 ```ruby
-python runAnalysis.py configAnalysisMC.json -runMC internal-dpl-aod-reader:aod-file:dileptonAod.root,analysis-dilepton-track:processDimuonMuonSkimmed:true,analysis-dilepton-track:processDummy:false
+python runAnalysis.py configAnalysisMC.json -runMC --arg internal-dpl-aod-reader:aod-file:dileptonAod.root,analysis-dilepton-track:processDimuonMuonSkimmed:true,analysis-dilepton-track:processDummy:false
 ```
 
 - Run FilterPP on Data:
