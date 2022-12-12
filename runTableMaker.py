@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='Arguments to pass')
 parser.add_argument('cfgFileName', metavar='text', default='config.json', help='config file name')
 parser.add_argument('-runData', help="Run over data", action="store_true")
 parser.add_argument('-runMC', help="Run over MC", action="store_true")
-parser.add_argument('analysisString', metavar='text', help='my analysis string')
+parser.add_argument('--arg', help='Configuration argument')
 parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
 parser.add_argument('--add_fdd_conv', help="Add the fdd converter", action="store_true")
 parser.add_argument('--add_track_prop', help="Add track propagation to the innermost layer (TPC or ITS)", action="store_true")
@@ -117,8 +117,14 @@ print("runOverMC ",runOverMC)
 if extrargs.add_track_prop:
   barrelDeps.remove("o2-analysis-trackextension")
 
-if extrargs.analysisString != "":
-  args = [line.split(':') for line in extrargs.analysisString.split(',') if line]
+if extrargs.arg != "" and extrargs.arg is not None:
+  args = [line.split(':') for line in extrargs.arg.split(',') if line]
+  for threeIndex in args:
+    if len(threeIndex) != 3:
+      print("ERROR: Wrong parameter syntax for --arg: ", threeIndex, " in ", extrargs.arg)
+      print("Correct syntax: task:param:value,task:param:value ... ")
+      print("Example: --arg table-maker:processBarrelOnly:true")
+      sys.exit()
   for arg in args:
     config[arg[0]][arg[1]] = arg[2]
 
@@ -135,7 +141,7 @@ if not taskNameInConfig in config:
 # Write the updated configuration file into a temporary file
 updatedConfigFileName = "tempConfig.json"
 with open(updatedConfigFileName,'w') as outputFile:
-  json.dump(config, outputFile)
+  json.dump(config, outputFile, indent = 2)
 
 # Check which dependencies need to be run
 depsToRun = {}
@@ -224,6 +230,9 @@ if extrargs.add_fdd_conv:
 
 if extrargs.add_track_prop:
     commandToRun += " | o2-analysis-track-propagation --configuration json://" + updatedConfigFileName + " -b"
+    
+if extrargs.add_weakdecay_ind:
+    commandToRun += " | o2-analysis-weak-decay-indices --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
