@@ -11,6 +11,7 @@ parser.add_argument('--arg', help='Configuration argument')
 parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
 parser.add_argument('--add_fdd_conv', help="Add the fdd converter", action="store_true")
 parser.add_argument('--add_track_prop', help="Add track propagation to the innermost layer (TPC or ITS)", action="store_true")
+parser.add_argument("--add_col_conv", help = "Add the converter from collision to collision+001", action = "store_true")
 extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table", "o2-analysis-trackselection", "o2-analysis-track-propagation", "o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full", "o2-analysis-fwdtrackextension"]
@@ -67,6 +68,9 @@ if extrargs.add_fdd_conv:
 
 if extrargs.add_track_prop:
     commandToRun += " | o2-analysis-track-propagation --configuration json://" + updatedConfigFileName + " -b"
+    
+if extrargs.add_col_conv:
+    commandToRun += " | o2-analysis-collision-converter --configuration json://" + updatedConfigFileName + " -b" 
 
 print("====================================================================================================================")
 print("Command to run:")
