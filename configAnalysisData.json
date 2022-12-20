@@ -24,8 +24,16 @@
         "cfgDalitzCutId": "32",
         "cfgQA": "true",
         "cfgAddTrackHistogram": "dca,its,tpcpid,tofpid",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
+        "ccdb-path-tpc": "Users\/i\/iarsene\/Calib\/TPCpostCalib",
+        "cfgTPCpostCalib": "false",
         "processSkimmed": "true",
         "processDummy": "false"
+    },
+    "analysis-prefilter-selection": {
+        "cfgPrefilterPairCut": "",
+        "processBarrelSkimmed": "false",
+        "processDummy": "true"
     },
     "analysis-muon-selection": {
         "cfgMuonCuts": "muonQualityCuts",
@@ -50,10 +58,11 @@
         "cfgTrackCuts": "jpsiO2MCdebugCuts",
         "cfgMuonCuts": "muonQualityCuts",
         "cfgAddSEPHistogram": "barrel,vertexing,flow",
-        "ccdb-url": "http:\/\/ccdb-test.cern.ch:8080",
+        "ccdb-url": "http:\/\/alice-ccdb.cern.ch",
         "ccdb-path": "Users\/lm",
         "ccdb-no-later-than": "1638360910432",
         "processDecayToEESkimmed": "true",
+        "processDecayToEEPrefilterSkimmed": "false",
         "processDecayToMuMuSkimmed": "true",
         "processDecayToMuMuVertexingSkimmed": "false",
         "processVnDecayToEESkimmed": "false",
