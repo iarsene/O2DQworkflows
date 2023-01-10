@@ -241,6 +241,9 @@
         "processFilterPPTiny": "false",
         "processDummy": "false"
     },
+    "collision-converter": {
+        "doNotSwap": "true"
+    },
     "table-maker": {
         "cfgEventCuts": "eventStandardNoINT7",
         "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts,kaonPID",
