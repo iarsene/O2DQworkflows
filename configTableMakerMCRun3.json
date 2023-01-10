@@ -189,6 +189,9 @@
         "processMuonOnlyWithCent": "false",
         "processOnlyBCs": "true"
     },
+    "collision-converter": {
+        "doNotSwap": "true"
+    },
     "internal-dpl-aod-global-analysis-file-sink": "",
     "internal-dpl-aod-writer": ""
 }
