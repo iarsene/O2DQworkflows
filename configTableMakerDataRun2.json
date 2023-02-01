@@ -214,7 +214,7 @@
         "processBarrelQvector": "true",
         "processDummy": "false"
     },
-    "d-q-barrel-track-selection-task": {
+    "d-q-barrel-track-selection": {
         "cfgBarrelTrackCuts": "jpsiPID1,jpsiPID2,jpsiPIDnsigma",
         "cfgWithQA": "false",
         "processSelection": "true",
