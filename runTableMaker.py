@@ -31,7 +31,7 @@ specificDeps = {
   "processBarrelOnlyWithCov" : [],
   "processBarrelOnlyWithV0Bits" : ["o2-analysis-dq-v0-selector"],
   "processBarrelOnlyWithDalitzBits" : ["o2-analysis-dq-dalitz-selection"],
-  "processBarrelOnlyWithEventFilter" : ["o2-analysis-dq-filter-pp"],
+  "processBarrelOnlyWithEventFilter" : ["o2-analysis-dq-filter-pp","o2-analysis-fwdtrackextension"],
   "processBarrelOnlyWithQvector" : ["o2-analysis-centrality-table", "o2-analysis-dq-flow"],
   "processBarrelOnlyWithCent" : ["o2-analysis-centrality-table"],
   "processMuonOnly" : [],
