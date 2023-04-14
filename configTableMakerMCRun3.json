@@ -184,7 +184,7 @@
     },
     "table-maker-m-c": {
         "cfgEventCuts": "eventStandardNoINT7",
-        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts,kaonPID",
+        "cfgBarrelTrackCuts": "jpsiO2MCdebugCuts2,jpsiO2MCdebugCuts3,jpsiO2MCdebugCuts,kaonPID2",
         "cfgMuonCuts": "muonQualityCuts,muonTightQualityCutsForTests",
         "cfgAddEventHistogram": "triggerall,cent,mc",
         "cfgAddTrackHistogram": "dca,its,tpcpid,tofpid,mc",
