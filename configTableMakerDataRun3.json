@@ -282,7 +282,7 @@
         "processFullWithCentAndMults": "false",
         "processBarrelOnlyWithV0Bits": "false",
         "processBarrelOnlyWithDalitzBits": "false",
-        "processBarrelOnlyWithEventFilter": "true",
+        "processBarrelOnlyWithEventFilter": "false",
         "processBarrelOnlyWithMults": "false",
         "processBarrelOnlyWithCovAndEventFilter": "false",
         "processBarrelOnlyWithCent": "false",
