@@ -33,6 +33,8 @@ Add extrac tables and converters with:
 2. **--add_fdd_conv**: conversion o2fdd from o2fdd_001
 3. **--add_track_prop**: conversion from o2track to o2track_iu ([link](https://aliceo2group.github.io/analysis-framework/docs/helperTasks/trackPropagation.html))
 4. **--add_weakdecay_ind**: Converts V0 and cascade version 000 to 001 
+5. **--add_zdc_conv**: Converts ZDC version 000 to 001 
+6. **--add_bc_conv**: Converts BC version 000 to 001 
 
 Examples:
 - Run TableMaker on Data
