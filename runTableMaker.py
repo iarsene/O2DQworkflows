@@ -14,6 +14,7 @@ parser.add_argument('--arg', help='Configuration argument')
 parser.add_argument('--add_mc_conv', help="Add the converter from mcparticle to mcparticle+001", action="store_true")
 parser.add_argument('--add_fdd_conv', help="Add the fdd converter", action="store_true")
 parser.add_argument('--add_zdc_conv', help="Add the zdc converter", action="store_true")
+parser.add_argument('--add_bc_conv', help="Add the BC converter", action="store_true")
 parser.add_argument('--add_track_prop', help="Add track propagation to the innermost layer (TPC or ITS)", action="store_true")
 parser.add_argument("--add_weakdecay_ind", help = "Add Converts V0 and cascade version 000 to 001", action = "store_true")
 parser.add_argument("--add_col_conv", help = "Add the converter from collision to collision+001", action = "store_true")
@@ -248,6 +249,9 @@ if extrargs.add_fdd_conv:
     
 if extrargs.add_zdc_conv:
     commandToRun += " | o2-analysis-zdc-converter --configuration json://" + updatedConfigFileName + " -b"
+
+if extrargs.add_bc_conv:
+    commandToRun += " | o2-analysis-bc-converter --configuration json://" + updatedConfigFileName + " -b"
 
 if extrargs.add_track_prop:
     commandToRun += " | o2-analysis-track-propagation --configuration json://" + updatedConfigFileName + " -b"
