@@ -18,6 +18,7 @@ parser.add_argument('--add_bc_conv', help="Add the BC converter", action="store_
 parser.add_argument('--add_track_prop', help="Add track propagation to the innermost layer (TPC or ITS)", action="store_true")
 parser.add_argument("--add_weakdecay_ind", help = "Add Converts V0 and cascade version 000 to 001", action = "store_true")
 parser.add_argument("--add_col_conv", help = "Add the converter from collision to collision+001", action = "store_true")
+parser.add_argument("--add_track_extra_conv", help = "Add the converter from track_extra to track_extra+001", action = "store_true")
 extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
@@ -261,6 +262,9 @@ if extrargs.add_weakdecay_ind:
 
 if extrargs.add_col_conv:
     commandToRun += " | o2-analysis-collision-converter --configuration json://" + updatedConfigFileName + " -b"
+
+if extrargs.add_track_extra_conv:
+    commandToRun += " | o2-analysis-tracks-extra-converter --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
