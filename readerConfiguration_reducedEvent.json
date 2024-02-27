@@ -43,6 +43,15 @@
       },
       {
         "table": "AOD/DALITZBITS/0",
+      },
+      {
+        "table": "AOD/RTASSOC/0",
+      },
+      {
+        "table": "AOD/RMASSOC/0",
+      },
+      {
+        "table": "AOD/RMFTASSOC/0",
       }
     ]
   }
