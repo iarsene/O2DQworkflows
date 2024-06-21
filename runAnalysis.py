@@ -11,6 +11,7 @@ parser.add_argument('cfgFileName', metavar='text', default='config.json', help='
 parser.add_argument('-runData', help="Run over data", action="store_true")
 parser.add_argument('-runDataWithAssoc', help="Run over data using the workflow with associations", action="store_true")
 parser.add_argument('-runMC', help="Run over MC", action="store_true")
+parser.add_argument('-runMCWithAssoc', help="Run over MC, with associations", action="store_true")
 parser.add_argument('--arg', help='Configuration argument')
 parser.add_argument("--aod-writer-json", help = "Name of the json configuration file", action = "store", type = str)
 
@@ -28,12 +29,12 @@ with open(extrargs.cfgFileName) as configFile:
   config = json.load(configFile)
 
 # Check whether we run over data or MC
-if not (extrargs.runMC or extrargs.runData or extrargs.runDataWithAssoc):
+if not (extrargs.runMC or extrargs.runData or extrargs.runDataWithAssoc or extrargs.runMCWithAssoc):
   print("ERROR: You have to specify either runMC or runData !")
   sys.exit()
 
 runOverMC = False
-if (extrargs.runMC):
+if (extrargs.runMC or extrargs.runMCWithAssoc):
   runOverMC = True
 
 print("runOverMC ",runOverMC)
@@ -53,8 +54,11 @@ taskNameInConfig = "analysis-event-selection"
 taskNameInCommandLine = "o2-analysis-dq-table-reader"
 if extrargs.runDataWithAssoc == True:
   taskNameInCommandLine = "o2-analysis-dq-table-reader-with-assoc"
-if runOverMC == True:
+if extrargs.runMC == True:
   taskNameInCommandLine = "o2-analysis-dq-efficiency"
+if extrargs.runMCWithAssoc == True:
+  taskNameInCommandLine = "o2-analysis-dq-efficiency-with-assoc"  
+
 
 if not taskNameInConfig in config:
   print("ERROR: Task to be run not found in the configuration file!")

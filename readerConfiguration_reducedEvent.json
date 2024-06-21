@@ -27,13 +27,19 @@
         "table": "AOD/RTBARRELPID/0",
       },
       {
-        "table": "AOD/RTMUON/0",
+        "table": "AOD/REDUCEDMUON/0",
       },
       {
         "table": "AOD/RTMUONEXTRA/0",
       },
       {
         "table": "AOD/RTMUONCOV/0",
+      },
+      {
+        "table": "AOD/REDUCEDMFT/0",
+      },
+      {
+        "table": "AOD/RMFTEXTRA/0",
       },
       {
         "table": "AOD/AMBIGUOUSTRACK/0",
@@ -52,6 +58,21 @@
       },
       {
         "table": "AOD/RMFTASSOC/0",
+      },
+      {
+        "table": "AOD/REMCCOLLBL/0",
+      },
+      {
+        "table": "AOD/RTBARRELLABELS/0",
+      },
+      {
+        "table": "AOD/RTMUONSLABELS/0",
+      },
+      {
+        "table": "AOD/REDUCEDMCEVENT/0",
+      },
+      {
+        "table": "AOD/REDUCEDMCTRACK/0",
       }
     ]
   }

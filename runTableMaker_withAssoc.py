@@ -19,22 +19,27 @@ parser.add_argument('--add_track_prop', help="Add track propagation to the inner
 parser.add_argument("--add_weakdecay_ind", help = "Add Converts V0 and cascade version 000 to 001", action = "store_true")
 parser.add_argument("--add_col_conv", help = "Add the converter from collision to collision+001", action = "store_true")
 parser.add_argument("--add_track_extra_conv", help = "Add the converter from track_extra to track_extra+001", action = "store_true")
+parser.add_argument("--add_mft_conv", help = "Add the converter from mfttrack_001 to mfttrack", action = "store_true")
 extrargs = parser.parse_args()
 
 commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection", "o2-analysis-multiplicity-table"]
+#commonDeps = ["o2-analysis-timestamp", "o2-analysis-event-selection"]
 barrelDeps = ["o2-analysis-trackselection", "o2-analysis-trackextension","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-base", "o2-analysis-pid-tpc-full", "o2-analysis-track-to-collision-associator"]
 #barrelDeps = ["o2-analysis-trackselection","o2-analysis-pid-tof-base", "o2-analysis-pid-tof", "o2-analysis-pid-tof-full", "o2-analysis-pid-tof-beta", "o2-analysis-pid-tpc-full"]
 muonDeps = ["o2-analysis-fwdtrackextension", "o2-analysis-fwdtrack-to-collision-associator"]
 #muonDeps = ["o2-analysis-fwdtrackextension"]
 specificDeps = {
-  "processPPWithFilter": ["o2-analysis-dq-filter-pp-with-association", "o2-analysis-mft-tracks-converter"],
+  "processPP": [],
+  "processPPBarrelOnly": [],
+  "processPPMuonOnly": [],
+  "processPPWithFilter": ["o2-analysis-dq-filter-pp-with-association"],
   "processPPWithFilterBarrelOnly": ["o2-analysis-dq-filter-pp-with-association"],
   "processPPWithFilterMuonOnly": ["o2-analysis-dq-filter-pp-with-association"],
-  "processPPWithFilterMuonMFT": ["o2-analysis-dq-filter-pp-with-association", "o2-analysis-mft-tracks-converter"],
-  "processPbPb": ["o2-analysis-mft-tracks-converter"],
+  "processPPWithFilterMuonMFT": ["o2-analysis-dq-filter-pp-with-association"],
+  "processPbPb": [],
   "processPbPbBarrelOnly": [],
   "processPbPbMuonOnly": [],
-  "processPbPbMuonMFT": ["o2-analysis-mft-tracks-converter"]
+  "processPbPbMuonMFT": []
 }
 
 # Definition of all the tables we may write
@@ -43,6 +48,8 @@ tables = {
   "ReducedEventsExtended" : {"table": "AOD/REEXTENDED/0"},
   "ReducedEventsVtxCov" : {"table": "AOD/REVTXCOV/0"},
   "ReducedEventsQvector" : {"table": "AOD/REQVECTOR/0"},
+  "ReducedEventsMultPV" : {"table": "AOD/REMULTPV/0"},
+  "ReducedEventsMultAll" : {"table": "AOD/REMULTALL/0"},
   "ReducedTracks" : {"table": "AOD/REDUCEDTRACK/0"},
   "ReducedTracksBarrel" : {"table": "AOD/RTBARREL/0"},
   "ReducedTracksBarrelCov" : {"table": "AOD/RTBARRELCOV/0"},
@@ -65,11 +72,14 @@ tables = {
   "ReducedMuonsLabels" : {"table": "AOD/RTMUONSLABELS/0"}
 }
 # Tables to be written, per process function
-commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov"]
+commonTables = ["ReducedEvents", "ReducedEventsExtended", "ReducedEventsVtxCov", "ReducedEventsMultPV", "ReducedEventsMultAll"]
 barrelCommonTables = ["ReducedTracks","ReducedTracksBarrel","ReducedTracksBarrelPID", "ReducedTracksBarrelCov", "ReducedTracksAssoc"]
 muonCommonTables = ["ReducedMuons", "ReducedMuonsExtra", "ReducedMuonsAssoc", "ReducedMuonsCov"]
 #muonCommonTables = ["ReducedMuons", "ReducedMuonsExtra", "ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMuonsAssoc", "ReducedMFTAssoc"]
 specificTables = {
+  "processPP": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
+  "processPPBarrelOnly": [],
+  "processPPMuonOnly": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
   "processPPWithFilter": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
   "processPPWithFilterBarrelOnly": [],
   "processPPWithFilterMuonOnly": [],
@@ -121,7 +131,8 @@ taskNameInConfig = "table-maker"
 taskNameInCommandLine = "o2-analysis-dq-table-maker-with-assoc"
 if runOverMC == True:
   taskNameInConfig = "table-maker-m-c"
-  taskNameInCommandLine = "o2-analysis-dq-table-maker-mc"
+  taskNameInCommandLine = "o2-analysis-dq-table-maker-mc-with-assoc"
+
 
 if not taskNameInConfig in config:
   print("ERROR: Task to be run not found in the configuration file!")
@@ -250,6 +261,9 @@ if extrargs.add_col_conv:
 
 if extrargs.add_track_extra_conv:
     commandToRun += " | o2-analysis-tracks-extra-converter --configuration json://" + updatedConfigFileName + " -b"
+
+if extrargs.add_mft_conv:
+    commandToRun += " | o2-analysis-mft-tracks-converter --configuration json://" + updatedConfigFileName + " -b"
 
 print("====================================================================================================================")
 print("Command to run:")
