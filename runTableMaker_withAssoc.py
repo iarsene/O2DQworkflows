@@ -32,6 +32,7 @@ specificDeps = {
   "processPP": [],
   "processPPBarrelOnly": [],
   "processPPMuonOnly": [],
+  "processPPMuonMFT": [],
   "processPPWithFilter": ["o2-analysis-dq-filter-pp-with-association"],
   "processPPWithFilterBarrelOnly": ["o2-analysis-dq-filter-pp-with-association"],
   "processPPWithFilterMuonOnly": ["o2-analysis-dq-filter-pp-with-association"],
@@ -80,6 +81,7 @@ specificTables = {
   "processPP": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
   "processPPBarrelOnly": [],
   "processPPMuonOnly": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
+  "processPPMuonMFT": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
   "processPPWithFilter": ["ReducedMFTTracks", "ReducedMFTTracksExtra", "ReducedMFTAssoc"],
   "processPPWithFilterBarrelOnly": [],
   "processPPWithFilterMuonOnly": [],
@@ -160,7 +162,7 @@ for processFunc in specificDeps.keys():
     if "BarrelOnly" in processFunc:
       for dep in muonDeps:
         depsToRun[dep] = 0
-    if "MuonOnly" in processFunc:
+    if "Muon" in processFunc:
       for dep in barrelDeps:
         depsToRun[dep] = 0    
     for dep in specificDeps[processFunc]:
@@ -199,7 +201,7 @@ for processFunc in specificDeps.keys():
         tablesToProduce[table] = 0
       if runOverMC == True:
         tablesToProduce["ReducedMuonsLabels"] = 0
-    if "MuonOnly" in processFunc:
+    if "Muon" in processFunc:
       print("common muon tables==========")
       for table in barrelCommonTables:
         print(table)
@@ -236,7 +238,8 @@ print(writerConfig)
 
 commandToRun = taskNameInCommandLine + " --configuration json://" + updatedConfigFileName + " --severity error --shm-segment-size 12000000000 --aod-writer-json " + writerConfigFileName + " -b"
 for dep in depsToRun.keys():
-  commandToRun += " | " + dep + " --configuration json://" + updatedConfigFileName + " -b"
+  if depsToRun[dep]:
+      commandToRun += " | " + dep + " --configuration json://" + updatedConfigFileName + " -b"
 
 if extrargs.add_mc_conv:
     commandToRun += " | o2-analysis-mc-converter --configuration json://" + updatedConfigFileName + " -b"
